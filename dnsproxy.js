@@ -3,7 +3,7 @@
 var opts  = require('rc')('dnsproxy', {
   port: 53,
   host: '127.0.0.1',
-  debug: 'dnsproxy:query',
+  logging: 'dnsproxy:query',
   nameservers: [
     '8.8.8.8',
     '8.8.4.4'
@@ -17,7 +17,7 @@ var opts  = require('rc')('dnsproxy', {
   }
 });
 
-process.env.DEBUG = process.env.DEBUG || opts.debug;
+process.env.DEBUG = process.env.DEBUG || opts.logging;
 var d = process.env.DEBUG.split(',')
 d.push('dnsproxy:error')
 process.env.DEBUG=d.join(',');
@@ -31,8 +31,6 @@ var logquery = require('debug')('dnsproxy:query');
 var logerror = require('debug')('dnsproxy:error');
 
 logdebug('options: %j', opts);
-
-
 
 var server = dgram.createSocket('udp4');
 
@@ -85,14 +83,13 @@ server.on('message', function(message, rinfo) {
       nameserver = opts.servers[s]
   });
 
+  var fallback;
   !function queryns(message, nameserver) {
-    var fallback;
-
     var sock = dgram.createSocket('udp4');
     sock.send(message, 0, message.length, 53, nameserver, function() {
       fallback = setTimeout(function() {
-        queryns(message, '8.8.8.8')
-      }, 250);
+        queryns(message, opts.nameservers[0])
+      }, 350);
     });
     sock.on('error', function(err) {
       logerror('Socket Error: %s', err);
