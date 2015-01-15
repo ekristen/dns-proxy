@@ -4,7 +4,7 @@ Simple DNS Proxy written in Node.JS
 
 Designed to allow you to override hosts or domains with specific answers or override tlds, or domains to use different nameservers. Useful when using VPN connections with split DNS setups.
 
-This app makes use of the [rc](https://www.npmjs.com/package/rc) module for configuration, the default configuration is below, use any file location to override the defaults.
+This app makes use of the [rc](https://www.npmjs.com/package/rc) module for configuration, the default configuration is below, use any file location to override the defaults. Appname is `dnsproxy` when creating a configuration file.
 
 I can guarentee this app isn't perfect but fulfills my current needs for routing certain domains to private IP name servers when on VPN.
 
