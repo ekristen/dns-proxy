@@ -1,10 +1,9 @@
 {
-  "name": "dnsproxy",
+  "name": "dns-proxy",
   "version": "0.1.0",
-  "description": "",
-  "main": "./dnsproxy.js",
+  "description": "Simple DNS Proxy written in Node.JS. Override hosts, domains, or tlds. Redirect certain domains to different nameservers.",
   "bin": {
-    "dnsproxy": "./dnsproxy.js"
+    "dns-proxy": "bin/dns-proxy"
   },
   "preferGlobal": true,
   "dependencies": {

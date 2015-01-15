@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 var opts  = require('rc')('dnsproxy', {
   port: 53,
   host: '127.0.0.1',
@@ -14,7 +12,8 @@ var opts  = require('rc')('dnsproxy', {
   },
   hosts: {
     'devlocal': '127.0.0.1'
-  }
+  },
+  fallback_timeout: 350
 });
 
 process.env.DEBUG = process.env.DEBUG || opts.logging;
@@ -89,7 +88,7 @@ server.on('message', function(message, rinfo) {
     sock.send(message, 0, message.length, 53, nameserver, function() {
       fallback = setTimeout(function() {
         queryns(message, opts.nameservers[0])
-      }, 350);
+      }, opts.fallback_timeout);
     });
     sock.on('error', function(err) {
       logerror('Socket Error: %s', err);
