@@ -1,0 +1,17 @@
+{
+  "name": "dnsproxy",
+  "version": "0.1.0",
+  "description": "",
+  "main": "./dnsproxy.js",
+  "bin": {
+    "dnsproxy": "./dnsproxy.js"
+  },
+  "preferGlobal": true,
+  "dependencies": {
+    "rc": "~0.5.5",
+    "debug": "~2.1.1",
+    "native-dns-packet": "~0.1.1"
+  },
+  "author": "ekristen",
+  "license": "MIT"
+}
