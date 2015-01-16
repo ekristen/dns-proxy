@@ -15,16 +15,16 @@ For nameserver overrides if an answer isn't received by a threshold (350ms by de
 ### TLD Specific Nameserver
 
 This will send all .com queries to 8.8.8.8
-```
+```js
 servers: {
-  'com': '8.8.8.8
+  'com': '8.8.8.8'
 }
 ```
 
 ### Domain Specific Nameserver
 
 This will match all google.com and its subdomains. 
-```
+```js
 servers: {
   'google.com': '8.8.8.8'
 }
@@ -32,7 +32,7 @@ servers: {
 
 ### Domain Specific Answers
 This will match all of google.com and its subdomains and return 127.0.0.1 as the answer.
-```
+```js
 domains: {
   'google.com': '127.0.0.1'
 }
@@ -40,7 +40,7 @@ domains: {
 
 
 ## Default Configuration
-```
+```js
 {
   port: 53,
   host: '127.0.0.1',
