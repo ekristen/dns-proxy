@@ -8,6 +8,11 @@ This app makes use of the [rc](https://www.npmjs.com/package/rc) module for conf
 
 I can guarentee this app isn't perfect but fulfills my current needs for routing certain domains to private IP name servers when on VPN.
 
+## Roadmap
+
+* Improve configuration logging locations (ie file vs stdout)
+* Service scripts for Linux and OSX
+
 ## Examples
 
 For nameserver overrides if an answer isn't received by a threshold (350ms by default) DNS proxy will fallback to one of the default nameservers provided in the configuration (by default 8.8.8.8 or 8.8.4.4)
@@ -15,32 +20,35 @@ For nameserver overrides if an answer isn't received by a threshold (350ms by de
 ### TLD Specific Nameserver
 
 This will send all .com queries to 8.8.8.8
-```
-servers: {
-  'com': '8.8.8.8
+```json
+"servers": {
+  "com": "8.8.8.8"
 }
 ```
+* This is a snippet that will go into your rc config file.
 
 ### Domain Specific Nameserver
 
 This will match all google.com and its subdomains. 
-```
-servers: {
-  'google.com': '8.8.8.8'
+```json
+"servers": {
+  "google.com": "8.8.8.8"
 }
 ```
+* This is a snippet that will go into your rc config file.
 
 ### Domain Specific Answers
 This will match all of google.com and its subdomains and return 127.0.0.1 as the answer.
-```
-domains: {
-  'google.com': '127.0.0.1'
+```json
+"domains": {
+  "google.com": "127.0.0.1"
 }
 ```
 
 
 ## Default Configuration
-```
+This is the default configuration in the application, you should override this by creating the proper rc file in one of the searchable paths.
+```js
 {
   port: 53,
   host: '127.0.0.1',
