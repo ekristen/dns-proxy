@@ -13,6 +13,10 @@ I can guarentee this app isn't perfect but fulfills my current needs for routing
 * Improve configuration logging locations (ie file vs stdout)
 * Service scripts for Linux and OSX
 
+## Install
+
+`npm install -g dns-proxy`
+
 ## Examples
 
 For nameserver overrides if an answer isn't received by a threshold (350ms by default) DNS proxy will fallback to one of the default nameservers provided in the configuration (by default 8.8.8.8 or 8.8.4.4)
