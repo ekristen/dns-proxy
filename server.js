@@ -16,6 +16,7 @@ var opts  = require('rc')('dnsproxy', {
   fallback_timeout: 350
 });
 
+process.env.DEBUG_FD = process.env.DEBUG_FD || 1;
 process.env.DEBUG = process.env.DEBUG || opts.logging;
 var d = process.env.DEBUG.split(',')
 d.push('dnsproxy:error')

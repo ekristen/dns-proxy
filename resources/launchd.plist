@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>com.github.ekristen.dns-proxy</string>
+    <key>ProgramArguments</key>
+    <array>
+      <string>/usr/local/bin/dns-proxy</string>
+      <string>--config</string>
+      <string>/usr/local/etc/dnsproxyrc</string>
+    </array>
+    <key>EnvironmentVariables</key>
+    <dict>
+      <key>PATH</key>
+      <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH</string>
+      <key>NODE_PATH</key>
+      <string>/usr/local/lib/node_modules/dns-proxy</string>
+    </dict>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/usr/local/var/log/dns-proxy/dns-proxy.log</string>
+    <key>StandardErrorPath</key>
+    <string>/usr/local/var/log/dns-proxy/dns-proxy.err</string>
+  </dict>
+</plist>

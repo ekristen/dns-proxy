@@ -64,3 +64,8 @@ domains: {
 Logging is handled by the simple lightweight [debug](https://www.npmjs.com/package/debug) package. By default all queries are logged. To change the logging output update the `logging` variable to any of the following: dns-proxy:error, dns-proxy:query, dns-proxy:debug. You can specify all or none, separate using a comma, a wildcard can be used as well.
 
 
+## Running as a Service 
+
+### OSX
+
+You can copy the `resources/launchd.plist` file into `/Library/LaunchDaemons` as `com.github.ekristen.dns-proxy.plist`. To start just run `sudo launchctl load /Library/LaunchDaemons/com.github.ekristen.dns-proxy.plist`. This will also make the dns-proxy service to start on boot.
