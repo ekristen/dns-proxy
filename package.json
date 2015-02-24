@@ -6,6 +6,10 @@
     "dns-proxy": "bin/dns-proxy"
   },
   "preferGlobal": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ekristen/dns-proxy.git"
+  },
   "dependencies": {
     "rc": "~0.5.5",
     "debug": "~2.1.1",
