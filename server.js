@@ -53,7 +53,7 @@ server.on('message', function(message, rinfo) {
     var s_len = s.length;
     var d_len = domain.length;
 
-    if (domain.indexOf(s) == (d_len - s_len)) {
+    if (domain.indexOf(s) >= 0 && domain.indexOf(s) == (d_len - s_len)) {
       logquery('type: server, domain: %s, answer: %s', domain, opts.domains[s]);
 
       var res = util.createAnswer(query, opts.domains[s]);
