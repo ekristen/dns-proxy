@@ -38,7 +38,9 @@ server.on('error', function(err) {
   logerror('Server Error: %s', err);
 });
 
-server.on('message', function(message, rinfo) {
+
+
+server.on('message', function (message, rinfo) {
   var nameserver = opts.nameservers[0];
   var returner = false;
   var use_failover = false;
@@ -54,9 +56,20 @@ server.on('message', function(message, rinfo) {
     var d_len = domain.length;
 
     if (domain.indexOf(s) >= 0 && domain.indexOf(s) == (d_len - s_len)) {
-      logquery('type: server, domain: %s, answer: %s', domain, opts.domains[s]);
 
-      var res = util.createAnswer(query, opts.domains[s]);
+      var return_ip=opts.domains[h];
+      if(!opts.hosts[h].match(/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/)) {
+          if(typeof(opts.cnames[opts.domains[h]]) != "undefined") {
+            return_ip=opts.cnames[opts.domains[h]];
+            console.log(opts.cnames[opts.domains[h]]);
+          } else {
+            return;
+          }
+      } 
+
+      logquery('type: server, domain: %s, answer: %s', domain, return_ip);
+
+      var res = util.createAnswer(query, return_ip);
       server.send(res, 0, res.length, rinfo.port, rinfo.address);
 
       returner = true;
@@ -67,9 +80,18 @@ server.on('message', function(message, rinfo) {
 
   Object.keys(opts.hosts).forEach(function(h) {
     if (domain == h) {
-      logquery('type: host, domain: %s, answer: %s', domain, opts.hosts[h]);
+      var return_ip=opts.hosts[h];
+      if(!opts.hosts[h].match(/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/)) {
+          if(typeof(opts.cnames[opts.hosts[h]]) != "undefined") {
+            return_ip=opts.cnames[opts.hosts[h]];
+            console.log(opts.cnames[opts.hosts[h]]);
+          } else {
+            return;
+          }
+      } 
+      logquery('type: host, domain: %s, answer: %s', domain, return_ip);
 
-      var res = util.createAnswer(query, opts.hosts[h]);
+      var res = util.createAnswer(query, return_ip);
       server.send(res, 0, res.length, rinfo.port, rinfo.address);
 
       returner = true;
@@ -77,6 +99,32 @@ server.on('message', function(message, rinfo) {
   });
 
   if (returner) return;
+
+
+  Object.keys(opts.wildcards).forEach(function(h) {
+    if (domain.match(h)) {
+      var return_ip=opts.wildcards[h];
+      if(!opts.wildcards[h].match(/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/)) {
+          if(typeof(opts.cnames[opts.wildcards[h]]) != "undefined") {
+            return_ip=opts.cnames[opts.wildcards[h]];
+            console.log(opts.cnames[opts.wildcards[h]]);
+          } else {
+            return;
+          }
+      } 
+      logquery('type: wildcard, domain: %s, answer: %s', domain, return_ip);
+
+      var res = util.createAnswer(query, return_ip);
+      server.send(res, 0, res.length, rinfo.port, rinfo.address);
+
+      returner = true;
+    }
+  });
+
+  if (returner) return;
+
+
+
 
   Object.keys(opts.servers).forEach(function(s) {
     if (domain.indexOf(s) !== -1)
