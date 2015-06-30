@@ -21,7 +21,7 @@ var opts  = require('rc')('dnsproxy', {
   },
   wildcards: {
     ".*system": "test"
-  }
+  },
   fallback_timeout: 350
 });
 
