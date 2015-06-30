@@ -11,8 +11,17 @@ var opts  = require('rc')('dnsproxy', {
     'dev': '127.0.0.1'
   },
   hosts: {
-    'devlocal': '127.0.0.1'
+    'devlocal': '127.0.0.1',
+    "livesystem": "live"
   },
+  cnames: {
+     "live": "127.0.0.1",
+     "stage": "127.0.0.1",
+     "test": "127.0.0.1"
+  },
+  wildcards: {
+    ".*system": "test"
+  }
   fallback_timeout: 350
 });
 
