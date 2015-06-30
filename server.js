@@ -38,7 +38,7 @@ server.on('error', function(err) {
   logerror('Server Error: %s', err);
 });
 
-server.on('message', function (message, rinfo) {
+server.on('message', function(message, rinfo) {
   var nameserver = opts.nameservers[0];
   var returner = false;
   var use_failover = false;
@@ -97,7 +97,6 @@ server.on('message', function (message, rinfo) {
   });
 
   if (returner) return;
-
 
   Object.keys(opts.wildcards).forEach(function(h) {
     if (domain.match(h)) {
