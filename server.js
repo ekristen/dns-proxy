@@ -38,8 +38,6 @@ server.on('error', function(err) {
   logerror('Server Error: %s', err);
 });
 
-
-
 server.on('message', function (message, rinfo) {
   var nameserver = opts.nameservers[0];
   var returner = false;
