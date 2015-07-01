@@ -42,13 +42,16 @@ This will match all google.com and its subdomains.
 * This is a snippet that will go into your rc config file.
 
 ### Domain Specific Answers
-This will match all of google.com and its subdomains and return 127.0.0.1 as the answer.
+This will match all of google.com and its subdomains and return 127.0.0.1 as the answer. This technically doens't even have to be a real domain or a full domain, if you configure `ogle.com` and do a lookup on `google.com`, the `ogle.com` will match.
 ```json
 "domains": {
   "google.com": "127.0.0.1"
 }
 ```
 
+### Aliases
+
+**Domains** and **Hosts** support aliases now, whereby you can define a host like normal such as `"hi": "127.0.0.1"` and in another entry reference it like `"hello": "hi"`.
 
 ## Default Configuration
 This is the default configuration in the application, you should override this by creating the proper rc file in one of the searchable paths.
