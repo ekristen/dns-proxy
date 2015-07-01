@@ -16,5 +16,8 @@
     "native-dns-packet": "~0.1.1"
   },
   "author": "ekristen",
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  }
 }
