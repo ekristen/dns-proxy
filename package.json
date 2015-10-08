@@ -1,15 +1,12 @@
 {
   "name": "dns-proxy",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Simple DNS Proxy written in Node.JS. Override hosts, domains, or tlds. Redirect certain domains to different nameservers.",
   "bin": {
     "dns-proxy": "bin/dns-proxy"
   },
   "preferGlobal": true,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ekristen/dns-proxy.git"
-  },
+  "repository": "ekristen/dns-proxy",
   "dependencies": {
     "rc": "~0.5.5",
     "debug": "~2.1.1",

@@ -49,6 +49,24 @@ server.on('message', function(message, rinfo) {
 
   logdebug('query: %j', query);
 
+  Object.keys(opts.hosts).forEach(function(h) {
+    if (domain == h) {
+      var answer = opts.hosts[h]
+      if (opts.hosts[opts.hosts[h]] != 'undefined') {
+        answer = opts.hosts[opts.hosts[h]]
+      }
+
+      logquery('type: host, domain: %s, answer: %s', domain, opts.hosts[h]);
+
+      var res = util.createAnswer(query, answer);
+      server.send(res, 0, res.length, rinfo.port, rinfo.address);
+
+      returner = true;
+    }
+  });
+
+  if (returner) return;
+
   Object.keys(opts.domains).forEach(function(s) {
     var s_len = s.length;
     var d_len = domain.length;
@@ -70,24 +88,6 @@ server.on('message', function(message, rinfo) {
   
   if (returner) return;
 
-  Object.keys(opts.hosts).forEach(function(h) {
-    if (domain == h) {
-      var answer = opts.hosts[h]
-      if (opts.hosts[opts.hosts[h]] != 'undefined') {
-        answer = opts.hosts[opts.hosts[h]]
-      }
-
-      logquery('type: host, domain: %s, answer: %s', domain, opts.hosts[h]);
-
-      var res = util.createAnswer(query, answer);
-      server.send(res, 0, res.length, rinfo.port, rinfo.address);
-
-      returner = true;
-    }
-  });
-
-  if (returner) return;
-
   Object.keys(opts.servers).forEach(function(s) {
     if (domain.indexOf(s) !== -1)
       nameserver = opts.servers[s]
@@ -103,6 +103,7 @@ server.on('message', function(message, rinfo) {
     });
     sock.on('error', function(err) {
       logerror('Socket Error: %s', err);
+      process.exit(5)
     });
     sock.on('message', function(response) {
       clearTimeout(fallback);
