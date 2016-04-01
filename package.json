@@ -10,9 +10,15 @@
   "author": "Erik Kristensen <erik@erikkristensen.com>",
   "license": "MIT",
   "repository": "ekristen/dns-proxy",
+  "scripts": {
+    "test": "standard dns-proxy.js"
+  },
   "dependencies": {
     "rc": "~1.1.6",
     "debug": "~2.2.0",
     "native-dns-packet": "~0.1.1"
+  },
+  "devDependencies": {
+    "standard": "^6.0.8"
   }
 }
