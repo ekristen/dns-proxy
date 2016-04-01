@@ -1,3 +1,5 @@
+[![npm](https://img.shields.io/npm/dt/dns-proxy.svg)](https://github.com/ekristen/dns-proxy) [![npm](https://img.shields.io/npm/l/dns-proxy.svg)](https://github.com/ekristen/dns-proxy) [![David](https://img.shields.io/david/ekristen/dns-proxy.svg)](https://github.com/ekristen/dns-proxy) [![David](https://img.shields.io/david/dev/ekristen/dns-proxy.svg)](https://github.com/ekristen/dns-proxy)
+
 # DNS Proxy
 
 Simple DNS Proxy written in Node.JS
