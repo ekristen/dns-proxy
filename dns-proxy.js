@@ -52,7 +52,7 @@ server.on('message', function(message, rinfo) {
   Object.keys(opts.hosts).forEach(function(h) {
     if (domain == h) {
       var answer = opts.hosts[h]
-      if (opts.hosts[opts.hosts[h]] != 'undefined') {
+      if (typeof opts.hosts[opts.hosts[h]] != 'undefined') {
         answer = opts.hosts[opts.hosts[h]]
       }
 
@@ -73,7 +73,7 @@ server.on('message', function(message, rinfo) {
 
     if (domain.indexOf(s) >= 0 && domain.indexOf(s) == (d_len - s_len)) {
       var answer = opts.domains[s]
-      if (opts.domains[opts.domains[s]] != 'undefined') {
+      if (typeof opts.domains[opts.domains[s]] != 'undefined') {
         answer = opts.domains[opts.domains[s]]
       }
 
