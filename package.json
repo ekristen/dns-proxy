@@ -5,6 +5,7 @@
   "bin": {
     "dns-proxy": "bin/dns-proxy"
   },
+  "main": "dns-proxy.js",
   "preferGlobal": true,
   "author": "Erik Kristensen <erik@erikkristensen.com>",
   "license": "MIT",
