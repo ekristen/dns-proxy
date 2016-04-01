@@ -10,11 +10,6 @@ This app makes use of the [rc](https://www.npmjs.com/package/rc) module for conf
 
 I can guarentee this app isn't perfect but fulfills my current needs for routing certain domains to private IP name servers when on VPN.
 
-## Roadmap
-
-* Improve configuration logging locations (ie file vs stdout)
-* Service scripts for Linux and OSX
-
 ## Install
 
 `npm install -g dns-proxy`
