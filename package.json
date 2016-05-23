@@ -11,7 +11,7 @@
   "license": "MIT",
   "repository": "ekristen/dns-proxy",
   "scripts": {
-    "test": "standard dns-proxy.js"
+    "test": "standard *.js"
   },
   "dependencies": {
     "rc": "~1.1.6",
