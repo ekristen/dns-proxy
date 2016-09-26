@@ -69,10 +69,10 @@ server.on('message', function (message, rinfo) {
   }
 
   Object.keys(opts.domains).forEach(function (s) {
-    var s_len = s.length
-    var d_len = domain.length
+    var sLen = s.length
+    var dLen = domain.length
 
-    if (domain.indexOf(s) >= 0 && domain.indexOf(s) === (d_len - s_len)) {
+    if (domain.indexOf(s) >= 0 && domain.indexOf(s) === (dLen - sLen)) {
       var answer = opts.domains[s]
       if (typeof opts.domains[opts.domains[s]] !== 'undefined') {
         answer = opts.domains[opts.domains[s]]
