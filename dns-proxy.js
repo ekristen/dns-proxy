@@ -24,7 +24,7 @@ const defaults = {
   reload_config: true
 }
 
-const config = rc('dnsproxy', defaults)
+let config = rc('dnsproxy', defaults)
 
 process.env.DEBUG_FD = process.env.DEBUG_FD || 1
 process.env.DEBUG = process.env.DEBUG || config.logging
