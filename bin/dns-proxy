@@ -1,3 +1,10 @@
-#!/usr/local/bin/node
+#!/usr/bin/env node
 
-require('../dns-proxy.js');
+process.title = 'dns-proxy';
+
+var resolve = require('resolve');
+
+resolve('dns-proxy', {basedir: process.cwd()}, function(error, path) {
+  require(path || '..');
+});
+
