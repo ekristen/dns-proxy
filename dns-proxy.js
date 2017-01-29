@@ -1,7 +1,14 @@
-var opts = require('rc')('dnsproxy', {
+const fs = require('fs')
+const rc = require('rc')
+const dgram = require('dgram')
+const packet = require('native-dns-packet')
+
+const util = require('./util.js')
+
+const defaults = {
   port: 53,
   host: '127.0.0.1',
-  logging: 'dnsproxy:query',
+  logging: 'dnsproxy:query,dnsproxy:info',
   nameservers: [
     '8.8.8.8',
     '8.8.4.4'
@@ -13,51 +20,69 @@ var opts = require('rc')('dnsproxy', {
   hosts: {
     'devlocal': '127.0.0.1'
   },
-  fallback_timeout: 350
-})
+  fallback_timeout: 350,
+  reload_config: true
+}
+
+const config = rc('dnsproxy', defaults)
 
 process.env.DEBUG_FD = process.env.DEBUG_FD || 1
-process.env.DEBUG = process.env.DEBUG || opts.logging
-var d = process.env.DEBUG.split(',')
+process.env.DEBUG = process.env.DEBUG || config.logging
+let d = process.env.DEBUG.split(',')
 d.push('dnsproxy:error')
 process.env.DEBUG = d.join(',')
 
-var dgram = require('dgram')
-var packet = require('native-dns-packet')
-var util = require('./util.js')
+const loginfo = require('debug')('dnsproxy:info')
+const logdebug = require('debug')('dnsproxy:debug')
+const logquery = require('debug')('dnsproxy:query')
+const logerror = require('debug')('dnsproxy:error')
 
-var logdebug = require('debug')('dnsproxy:debug')
-var logquery = require('debug')('dnsproxy:query')
-var logerror = require('debug')('dnsproxy:error')
+if (config.reload_config === true) {
+  var configFile = config.config
+  fs.watchFile(configFile, function (curr, prev) {
+    loginfo('config file changed, reloading config options')
+    try {
+      config = rc('dnsproxy', defaults)
+    } catch (e) {
+      logerror('error reloading configuration')
+      logerror(e)
+    }
+  })
+}
 
-logdebug('options: %j', opts)
+logdebug('options: %j', config)
 
-var server = dgram.createSocket('udp4')
+const server = dgram.createSocket('udp4')
+
+server.on('listening', function () {
+  loginfo('we are up and listening at %s on %s', config.host, config.port)
+})
 
 server.on('error', function (err) {
-  logerror('Server Error: %s', err)
+  logerror('udp socket error')
+  logerror(err)
 })
 
 server.on('message', function (message, rinfo) {
-  var nameserver = opts.nameservers[0]
-  var returner = false
+  let returner = false
+  let nameserver = config.nameservers[0]
 
-  var query = packet.parse(message)
-  var domain = query.question[0].name
-  var type = query.question[0].type
+  const query = packet.parse(message)
+  const domain = query.question[0].name
+  const type = query.question[0].type
 
   logdebug('query: %j', query)
 
-  Object.keys(opts.hosts).forEach(function (h) {
+  Object.keys(config.hosts).forEach(function (h) {
     if (domain === h) {
-      var answer = opts.hosts[h]
-      if (typeof opts.hosts[opts.hosts[h]] !== 'undefined') {
-        answer = opts.hosts[opts.hosts[h]]
+      let answer = config.hosts[h]
+      if (typeof config.hosts[config.hosts[h]] !== 'undefined') {
+        answer = config.hosts[config.hosts[h]]
       }
 
-      logquery('type: host, domain: %s, answer: %s, source: %s:%s, size: %d', domain, opts.hosts[h], rinfo.address, rinfo.port, rinfo.size)
+      logquery('type: host, domain: %s, answer: %s, source: %s:%s, size: %d', domain, config.hosts[h], rinfo.address, rinfo.port, rinfo.size)
 
-      var res = util.createAnswer(query, answer)
+      let res = util.createAnswer(query, answer)
       server.send(res, 0, res.length, rinfo.port, rinfo.address)
 
       returner = true
@@ -68,19 +93,19 @@ server.on('message', function (message, rinfo) {
     return
   }
 
-  Object.keys(opts.domains).forEach(function (s) {
-    var sLen = s.length
-    var dLen = domain.length
+  Object.keys(config.domains).forEach(function (s) {
+    let sLen = s.length
+    let dLen = domain.length
 
     if (domain.indexOf(s) >= 0 && domain.indexOf(s) === (dLen - sLen)) {
-      var answer = opts.domains[s]
-      if (typeof opts.domains[opts.domains[s]] !== 'undefined') {
-        answer = opts.domains[opts.domains[s]]
+      let answer = config.domains[s]
+      if (typeof config.domains[config.domains[s]] !== 'undefined') {
+        answer = config.domains[config.domains[s]]
       }
 
-      logquery('type: server, domain: %s, answer: %s, source: %s:%s, size: %d', domain, opts.domains[s], rinfo.address, rinfo.port, rinfo.size)
+      logquery('type: server, domain: %s, answer: %s, source: %s:%s, size: %d', domain, config.domains[s], rinfo.address, rinfo.port, rinfo.size)
 
-      var res = util.createAnswer(query, answer)
+      let res = util.createAnswer(query, answer)
       server.send(res, 0, res.length, rinfo.port, rinfo.address)
 
       returner = true
@@ -91,19 +116,19 @@ server.on('message', function (message, rinfo) {
     return
   }
 
-  Object.keys(opts.servers).forEach(function (s) {
+  Object.keys(config.servers).forEach(function (s) {
     if (domain.indexOf(s) !== -1) {
-      nameserver = opts.servers[s]
+      nameserver = config.servers[s]
     }
   })
 
-  var fallback
+  let fallback
   (function queryns (message, nameserver) {
-    var sock = dgram.createSocket('udp4')
+    const sock = dgram.createSocket('udp4')
     sock.send(message, 0, message.length, 53, nameserver, function () {
       fallback = setTimeout(function () {
-        queryns(message, opts.nameservers[0])
-      }, opts.fallback_timeout)
+        queryns(message, config.nameservers[0])
+      }, config.fallback_timeout)
     })
     sock.on('error', function (err) {
       logerror('Socket Error: %s', err)
@@ -118,4 +143,4 @@ server.on('message', function (message, rinfo) {
   }(message, nameserver))
 })
 
-server.bind(opts.port, opts.host)
+server.bind(config.port, config.host)
