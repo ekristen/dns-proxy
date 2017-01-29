@@ -19,7 +19,8 @@
     "debug": "^2.6.0",
     "native-dns-packet": "~0.1.1",
     "rc": "^1.1.6",
-    "resolve": "^1.2.0"
+    "resolve": "^1.2.0",
+    "wildcard2": "0.0.2"
   },
   "devDependencies": {
     "standard": "^8.6.0"
