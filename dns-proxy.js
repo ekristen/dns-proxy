@@ -136,7 +136,7 @@ server.on('message', function (message, rinfo) {
     })
     sock.on('message', function (response) {
       clearTimeout(fallback)
-      logquery('type: primary, nameserver: %s, query: %s, type: %s, answer: %s, source: %s:%s, size: %d, type: server', nameserver, domain, util.records[type] || 'unknown', util.listAnswer(response), rinfo.address, rinfo.port, rinfo.size)
+      logquery('type: primary, nameserver: %s, query: %s, type: %s, answer: %s, source: %s:%s, size: %d', nameserver, domain, util.records[type] || 'unknown', util.listAnswer(response), rinfo.address, rinfo.port, rinfo.size)
       server.send(response, 0, response.length, rinfo.port, rinfo.address)
       sock.close()
     })
