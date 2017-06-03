@@ -123,7 +123,7 @@ server.on('message', function (message, rinfo) {
   })
   let nameParts = nameserver.split(':')
   nameserver = nameParts[0]
-  let port = nameParts[1] || 53  
+  let port = nameParts[1] || 53
   let fallback
   (function queryns (message, nameserver) {
     const sock = dgram.createSocket('udp4')

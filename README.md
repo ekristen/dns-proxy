@@ -20,10 +20,11 @@ For nameserver overrides if an answer isn't received by a threshold (350ms by de
 
 ### TLD Specific Nameserver
 
-This will send all .com queries to 8.8.8.8
+This will send all .com queries to 8.8.8.8 and .dk queries to 127.0.0.1 and custom port 54.
 ```json
 "servers": {
-  "com": "8.8.8.8"
+  "com": "8.8.8.8",
+  "dk": "127.0.0.1:54"
 }
 ```
 * This is a snippet that will go into your rc config file.
@@ -33,7 +34,7 @@ This will send all .com queries to 8.8.8.8
 This will match all google.com and its subdomains. 
 ```json
 "servers": {
-  "google.com": "8.8.8.8"
+  "google.com": "8.8.8.8",
 }
 ```
 * This is a snippet that will go into your rc config file.
