@@ -121,11 +121,13 @@ server.on('message', function (message, rinfo) {
       nameserver = config.servers[s]
     }
   })
-
+  let nameParts = nameserver.split(':')
+  nameserver = nameParts[0]
+  let port = nameParts[1] || 53  
   let fallback
   (function queryns (message, nameserver) {
     const sock = dgram.createSocket('udp4')
-    sock.send(message, 0, message.length, 53, nameserver, function () {
+    sock.send(message, 0, message.length, port, nameserver, function () {
       fallback = setTimeout(function () {
         queryns(message, config.nameservers[0])
       }, config.fallback_timeout)
