@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ekristen/dns-proxy.svg?branch=master)](https://travis-ci.org/ekristen/dns-proxy) [![npm](https://img.shields.io/npm/dt/dns-proxy.svg)](https://github.com/ekristen/dns-proxy) [![npm](https://img.shields.io/npm/l/dns-proxy.svg)](https://github.com/ekristen/dns-proxy) [![David](https://img.shields.io/david/ekristen/dns-proxy.svg)](https://github.com/ekristen/dns-proxy) [![David](https://img.shields.io/david/dev/ekristen/dns-proxy.svg)](https://github.com/ekristen/dns-proxy)
+[![CircleCI](https://img.shields.io/circleci/project/github/ekristen/dns-proxy.svg)](https://circleci.com/gh/ekristen/dns-proxy/) [![npm](https://img.shields.io/npm/dt/dns-proxy.svg)](https://github.com/ekristen/dns-proxy) [![npm](https://img.shields.io/npm/l/dns-proxy.svg)](https://github.com/ekristen/dns-proxy) [![David](https://img.shields.io/david/ekristen/dns-proxy.svg)](https://github.com/ekristen/dns-proxy) [![David](https://img.shields.io/david/dev/ekristen/dns-proxy.svg)](https://github.com/ekristen/dns-proxy)
 
 # DNS Proxy
 
