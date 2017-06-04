@@ -34,7 +34,7 @@ This will send all .com queries to 8.8.8.8 and .dk queries to 127.0.0.1 and cust
 This will match all google.com and its subdomains. 
 ```json
 "servers": {
-  "google.com": "8.8.8.8",
+  "google.com": "8.8.8.8"
 }
 ```
 * This is a snippet that will go into your rc config file.
@@ -71,6 +71,7 @@ This is the default configuration in the application, you should override this b
   }
 }
 ```
+* Note this snippet is JavaScript and rc config file format is JSON.
 
 ## Logging
 
