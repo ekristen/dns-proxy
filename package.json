@@ -22,6 +22,7 @@
     "resolve": "^1.2.0"
   },
   "devDependencies": {
-    "standard": "^9.0.2"
+    "pkg": "^3.0.6",
+    "standard": "^10.0.2"
   }
 }
