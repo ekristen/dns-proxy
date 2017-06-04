@@ -13,7 +13,8 @@
   "scripts": {
     "start": "dns-proxy.js",
     "test": "npm run test:standard",
-    "test:standard": "standard *.js"
+    "test:standard": "standard *.js",
+    "pkg": "pkg --out-dir release --targets node7-macos-x64,node7-alpine-x64,node7-linux-x64,node7-win dns-proxy.js"
   },
   "dependencies": {
     "debug": "^2.6.0",
