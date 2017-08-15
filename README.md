@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ekristen/dns-proxy.svg?branch=master)](https://travis-ci.org/ekristen/dns-proxy) [![npm](https://img.shields.io/npm/dt/dns-proxy.svg)](https://github.com/ekristen/dns-proxy) [![npm](https://img.shields.io/npm/l/dns-proxy.svg)](https://github.com/ekristen/dns-proxy) [![David](https://img.shields.io/david/ekristen/dns-proxy.svg)](https://github.com/ekristen/dns-proxy) [![David](https://img.shields.io/david/dev/ekristen/dns-proxy.svg)](https://github.com/ekristen/dns-proxy)
+[![CircleCI](https://img.shields.io/circleci/project/github/ekristen/dns-proxy.svg)](https://circleci.com/gh/ekristen/dns-proxy/) [![npm](https://img.shields.io/npm/dt/dns-proxy.svg)](https://github.com/ekristen/dns-proxy) [![npm](https://img.shields.io/npm/l/dns-proxy.svg)](https://github.com/ekristen/dns-proxy) [![David](https://img.shields.io/david/ekristen/dns-proxy.svg)](https://github.com/ekristen/dns-proxy) [![David](https://img.shields.io/david/dev/ekristen/dns-proxy.svg)](https://github.com/ekristen/dns-proxy)
 
 # DNS Proxy
 
@@ -20,10 +20,11 @@ For nameserver overrides if an answer isn't received by a threshold (350ms by de
 
 ### TLD Specific Nameserver
 
-This will send all .com queries to 8.8.8.8
+This will send all .com queries to 8.8.8.8 and .dk queries to 127.0.0.1 and custom port 54.
 ```json
 "servers": {
-  "com": "8.8.8.8"
+  "com": "8.8.8.8",
+  "dk": "127.0.0.1:54"
 }
 ```
 * This is a snippet that will go into your rc config file.
@@ -79,6 +80,7 @@ This is the default configuration in the application, you should override this b
   }
 }
 ```
+* Note this snippet is JavaScript and rc config file format is JSON.
 
 ## Logging
 

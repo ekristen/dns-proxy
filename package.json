@@ -3,7 +3,7 @@
   "version": "0.6.0",
   "description": "Simple DNS Proxy written in Node.JS. Override hosts, domains, or tlds. Redirect certain domains to different nameservers.",
   "bin": {
-    "dns-proxy": "bin/dns-proxy"
+    "dns-proxy": "dns-proxy.js"
   },
   "main": "dns-proxy.js",
   "preferGlobal": true,
@@ -11,18 +11,19 @@
   "license": "MIT",
   "repository": "ekristen/dns-proxy",
   "scripts": {
-    "start": "bin/dns-proxy",
+    "start": "dns-proxy.js",
     "test": "npm run test:standard",
-    "test:standard": "standard *.js"
+    "test:standard": "standard *.js",
+    "pkg": "pkg --out-dir release --targets node7-macos-x64,node7-alpine-x64,node7-linux-x64,node7-win dns-proxy.js"
   },
   "dependencies": {
     "debug": "^2.6.0",
     "native-dns-packet": "~0.1.1",
     "rc": "^1.1.6",
-    "resolve": "^1.2.0",
     "wildcard2": "0.0.2"
   },
   "devDependencies": {
-    "standard": "^8.6.0"
+    "pkg": "^3.0.6",
+    "standard": "^10.0.2"
   }
 }
