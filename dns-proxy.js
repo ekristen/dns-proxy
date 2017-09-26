@@ -38,7 +38,7 @@ const logquery = require('debug')('dnsproxy:query')
 const logerror = require('debug')('dnsproxy:error')
 
 if (config.reload_config === true) {
-  var configFile = config.config
+  let configFile = config.config
   fs.watchFile(configFile, function (curr, prev) {
     loginfo('config file changed, reloading config options')
     try {
