@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const fs = require('fs')
 const rc = require('rc')
 const dgram = require('dgram')
