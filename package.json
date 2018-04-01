@@ -1,6 +1,6 @@
 {
   "name": "dns-proxy",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple DNS Proxy written in Node.JS. Override hosts, domains, or tlds.",
   "bin": {
     "dns-proxy": "dns-proxy.js"
