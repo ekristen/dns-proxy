@@ -47,6 +47,15 @@ This will match all of google.com and its subdomains and return 127.0.0.1 as the
 }
 ```
 
+### Wildcard Domain Specific Answers
+
+this will resolve `review-someotherstring.google.com` to `127.0.0.1`
+```json
+"domains": {
+  "review-*.google.com": "127.0.0.1"
+}
+```
+
 ### Aliases
 
 **Domains** and **Hosts** support aliases now, whereby you can define a host like normal such as `"hi": "127.0.0.1"` and in another entry reference it like `"hello": "hi"`.

@@ -1,7 +1,10 @@
+#!/usr/bin/env node
+
 const fs = require('fs')
 const rc = require('rc')
 const dgram = require('dgram')
 const packet = require('native-dns-packet')
+const wildcard = require('wildcard2')
 
 const util = require('./util.js')
 
@@ -97,7 +100,7 @@ server.on('message', function (message, rinfo) {
     let sLen = s.length
     let dLen = domain.length
 
-    if (domain.indexOf(s) >= 0 && domain.indexOf(s) === (dLen - sLen)) {
+    if ((domain.indexOf(s) >= 0 && domain.indexOf(s) === (dLen - sLen)) || wildcard(domain, s)) {
       let answer = config.domains[s]
       if (typeof config.domains[config.domains[s]] !== 'undefined') {
         answer = config.domains[config.domains[s]]
