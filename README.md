@@ -12,6 +12,10 @@ I can guarentee this app isn't perfect but fulfills my current needs for routing
 
 ## Install
 
+Grab a binary from the release section.
+
+### OLD METHOD
+
 `npm install -g dns-proxy`
 
 ## Features
