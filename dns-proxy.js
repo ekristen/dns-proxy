@@ -13,8 +13,8 @@ const defaults = {
   host: '127.0.0.1',
   logging: 'dnsproxy:query,dnsproxy:info',
   nameservers: [
-    '8.8.8.8',
-    '8.8.4.4'
+    '1.1.1.1',
+    '1.0.0.1'
   ],
   servers: {},
   domains: {

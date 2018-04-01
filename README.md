@@ -14,6 +14,14 @@ I can guarentee this app isn't perfect but fulfills my current needs for routing
 
 `npm install -g dns-proxy`
 
+## Features
+
+* Override nameservers for TLD
+* Override nameservers for Domain
+* Set IP for entire domain or TLD. (example: if you want to answer 192.168.11.1 for local.dev)
+* Set IP for host
+* Wildcard Support
+
 ## Examples
 
 For nameserver overrides if an answer isn't received by a threshold (350ms by default) DNS proxy will fallback to one of the default nameservers provided in the configuration (by default 8.8.8.8 or 8.8.4.4)
