@@ -18,7 +18,7 @@ const defaults = {
   ],
   servers: {},
   domains: {
-    'dev': '127.0.0.1'
+    'xdev': '127.0.0.1'
   },
   hosts: {
     'devlocal': '127.0.0.1'
