@@ -8,12 +8,14 @@ module.exports.records = {
   '12': 'PTR',
   '15': 'MX',
   '16': 'TXT',
-  '28': 'AAAA'
+  '28': 'AAAA',
+  '33': 'SRV',
 }
 
 module.exports.listAnswer = function (response) {
   let results = []
   const res = packet.parse(response)
+
   res.answer.map(function (r) {
     results.push(r.address || r.data)
   })
