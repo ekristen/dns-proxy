@@ -19,7 +19,7 @@
   "dependencies": {
     "debug": "^4.0.0",
     "native-dns-packet": "~0.1.1",
-    "rc": "^1.1.6",
+    "rc": "^1.2.8",
     "wildcard2": "0.0.2"
   },
   "devDependencies": {
