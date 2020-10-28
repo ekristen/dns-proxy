@@ -24,6 +24,6 @@
   },
   "devDependencies": {
     "pkg": "4.4.8",
-    "standard": "14.3.3"
+    "standard": "15.0.0"
   }
 }
