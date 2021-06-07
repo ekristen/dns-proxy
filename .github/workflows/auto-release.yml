@@ -9,7 +9,8 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: release-drafter/release-drafter@v5
+      - id: release
+        uses: release-drafter/release-drafter@v5
         with:
           publish: true
           prerelease: false
@@ -17,7 +18,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     outputs:
-      upload_url: ${{ steps.publish.outputs.upload_url }}
+      upload_url: ${{ steps.release.outputs.upload_url }}
 
   build:
     runs-on: ubuntu-latest
