@@ -30,7 +30,7 @@ jobs:
         with:
           node-version: 15.x
       - run: npm install
-      - run: npm pkg
+      - run: npm run pkg
       - uses: shogo82148/actions-upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
