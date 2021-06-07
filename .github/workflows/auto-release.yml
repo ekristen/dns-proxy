@@ -33,7 +33,7 @@ jobs:
       - run: npm run pkg
       - uses: shogo82148/actions-upload-release-asset@v1
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ needs.publish.outputs.upload_url }}
           asset_path: release/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
