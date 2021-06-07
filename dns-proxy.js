@@ -18,10 +18,10 @@ const defaults = {
   ],
   servers: {},
   domains: {
-    'xdev': '127.0.0.1'
+    xdev: '127.0.0.1'
   },
   hosts: {
-    'devlocal': '127.0.0.1'
+    devlocal: '127.0.0.1'
   },
   fallback_timeout: 350,
   reload_config: true
@@ -31,7 +31,7 @@ let config = rc('dnsproxy', defaults)
 
 process.env.DEBUG_FD = process.env.DEBUG_FD || 1
 process.env.DEBUG = process.env.DEBUG || config.logging
-let d = process.env.DEBUG.split(',')
+const d = process.env.DEBUG.split(',')
 d.push('dnsproxy:error')
 process.env.DEBUG = d.join(',')
 
@@ -40,7 +40,7 @@ const logdebug = require('debug')('dnsproxy:debug')
 const logquery = require('debug')('dnsproxy:query')
 const logerror = require('debug')('dnsproxy:error')
 
-if (config.reload_config === true) {
+if (config.reload_config === true && typeof config.config !== 'undefined') {
   var configFile = config.config
   fs.watchFile(configFile, function (curr, prev) {
     loginfo('config file changed, reloading config options')
@@ -85,7 +85,7 @@ server.on('message', function (message, rinfo) {
 
       logquery('type: host, domain: %s, answer: %s, source: %s:%s, size: %d', domain, config.hosts[h], rinfo.address, rinfo.port, rinfo.size)
 
-      let res = util.createAnswer(query, answer)
+      const res = util.createAnswer(query, answer)
       server.send(res, 0, res.length, rinfo.port, rinfo.address)
 
       returner = true
@@ -97,8 +97,8 @@ server.on('message', function (message, rinfo) {
   }
 
   Object.keys(config.domains).forEach(function (s) {
-    let sLen = s.length
-    let dLen = domain.length
+    const sLen = s.length
+    const dLen = domain.length
 
     if ((domain.indexOf(s) >= 0 && domain.indexOf(s) === (dLen - sLen)) || wildcard(domain, s)) {
       let answer = config.domains[s]
@@ -108,7 +108,7 @@ server.on('message', function (message, rinfo) {
 
       logquery('type: server, domain: %s, answer: %s, source: %s:%s, size: %d', domain, config.domains[s], rinfo.address, rinfo.port, rinfo.size)
 
-      let res = util.createAnswer(query, answer)
+      const res = util.createAnswer(query, answer)
       server.send(res, 0, res.length, rinfo.port, rinfo.address)
 
       returner = true
@@ -124,9 +124,9 @@ server.on('message', function (message, rinfo) {
       nameserver = config.servers[s]
     }
   })
-  let nameParts = nameserver.split(':')
+  const nameParts = nameserver.split(':')
   nameserver = nameParts[0]
-  let port = nameParts[1] || 53
+  const port = nameParts[1] || 53
   let fallback
   (function queryns (message, nameserver) {
     const sock = dgram.createSocket('udp4')

@@ -1,18 +1,18 @@
 const packet = require('native-dns-packet')
 
 module.exports.records = {
-  '1': 'A',
-  '2': 'NS',
-  '5': 'CNAME',
-  '6': 'SOA',
-  '12': 'PTR',
-  '15': 'MX',
-  '16': 'TXT',
-  '28': 'AAAA'
+  1: 'A',
+  2: 'NS',
+  5: 'CNAME',
+  6: 'SOA',
+  12: 'PTR',
+  15: 'MX',
+  16: 'TXT',
+  28: 'AAAA'
 }
 
 module.exports.listAnswer = function (response) {
-  let results = []
+  const results = []
   const res = packet.parse(response)
   res.answer.map(function (r) {
     results.push(r.address || r.data)

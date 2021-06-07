@@ -1,0 +1,38 @@
+name: auto-release
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: release-drafter/release-drafter@v5
+        with:
+          publish: true
+          prerelease: false
+          config-name: auto-release.yml
+    outputs:
+      upload_url: ${{ steps.publish.outputs.upload_url }}
+
+  build:
+    runs-on: ubuntu-latest
+    needs:
+      - publish
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x, 15.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm pkg
+      - uses: shogo82148/actions-upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: release/*
