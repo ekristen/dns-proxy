@@ -14,7 +14,7 @@
     "start": "node ./dns-proxy.js",
     "test": "npm run test:standard",
     "test:standard": "standard *.js",
-    "pkg": "pkg --out-dir release --targets node8-macos-x64,node8-alpine-x64,node8-linux-x64,node8-win dns-proxy.js"
+    "pkg": "pkg --out-dir release --targets node12-macos-x64,node12-alpine-x64,node12-linux-x64,node12-win dns-proxy.js"
   },
   "dependencies": {
     "debug": "^4.0.0",
