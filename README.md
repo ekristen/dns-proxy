@@ -1,4 +1,4 @@
-[![CircleCI](https://img.shields.io/circleci/project/github/ekristen/dns-proxy.svg)](https://circleci.com/gh/ekristen/dns-proxy/) [![npm](https://img.shields.io/npm/dt/dns-proxy.svg)](https://www.npmjs.org/package/dns-proxy) [![npm](https://img.shields.io/npm/l/dns-proxy.svg)](https://www.npmjs.org/package/dns-proxy) ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/ekristen/dns-proxy/total)
+[![npm](https://img.shields.io/npm/dt/dns-proxy.svg)](https://www.npmjs.org/package/dns-proxy) [![npm](https://img.shields.io/npm/l/dns-proxy.svg)](https://www.npmjs.org/package/dns-proxy) ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/ekristen/dns-proxy/total)
 
 # DNS Proxy
 
