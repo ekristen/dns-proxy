@@ -23,7 +23,7 @@
     "wildcard2": "0.0.2"
   },
   "devDependencies": {
-    "pkg": "5.5.2",
+    "pkg": "5.8.1",
     "standard": "14.3.3"
   }
 }
